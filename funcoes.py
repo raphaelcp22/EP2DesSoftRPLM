@@ -18,3 +18,9 @@ def guardar_dado (dados_rolados, dados_no_estoque, indice):
 
     return [dados_rolados, dados_finais]
 
+def remover_dado(dados_rolados, dados_no_estoque, indice):
+    dado = dados_no_estoque[indice]
+    dados_rolados.append(dado)
+    del dados_no_estoque[indice]
+
+    return [dados_rolados, dados_no_estoque]
