@@ -77,7 +77,9 @@ def calcula_pontos_full_house (lista_inteiros):
         else:
             contagem_rep[dado] = 1
 
-    if len(contagem_rep) == 2:
+    ocorrencias = contagem_rep.values()
+
+    if len(contagem_rep) == 2 and 3 in ocorrencias and 2 in ocorrencias:
         return sum(lista_inteiros)
     else:
         return 0
