@@ -66,3 +66,18 @@ def calcula_pontos_sequencia_alta (lista_inteiros):
             contador = 1
         i += 1
     return pontuacao
+
+def calcula_pontos_full_house (lista_inteiros):
+
+    contagem_rep = {}
+
+    for dado in lista_inteiros:
+        if dado in contagem_rep:
+            contagem_rep[dado] += 1
+        else:
+            contagem_rep[dado] = 1
+
+    if len(contagem_rep) == 2:
+        return sum(lista_inteiros)
+    else:
+        return 0
