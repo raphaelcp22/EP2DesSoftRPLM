@@ -104,3 +104,21 @@ def calcula_pontos_quadra(lista_inteiros):
             return valor
 
     return 0
+
+def calcula_pontos_quina(lista_inteiros):
+    contagem_rep = {}
+
+    for dado in lista_inteiros:
+        if dado in contagem_rep:
+            contagem_rep[dado] += 1
+        else:
+            contagem_rep[dado] = 1
+
+    for quantidade in contagem_rep.values():
+        if quantidade >= 5:
+            valor = 50
+            for dado in lista_inteiros:
+                valor += dado
+            return valor
+
+    return 0
