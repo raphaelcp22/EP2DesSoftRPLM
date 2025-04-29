@@ -30,3 +30,9 @@ def calcula_pontos_regra_simples(lista_int):
     for dado in lista_int:
         dicio[dado] += dado
     return dicio
+
+def calcula_pontos_soma (lista):
+    soma = 0
+    for faces in lista:
+        soma += lista[faces]
+    return soma 
