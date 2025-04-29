@@ -96,12 +96,11 @@ def calcula_pontos_quadra(lista_inteiros):
         else:
             contagem_rep[dado] = 1
 
-    ocorrencias = contagem_rep.values()
+    for quantidade in contagem_rep.values():
+        if quantidade > 4:
+            valor = 0
+            for dado in lista_inteiros:
+                valor += dado
+            return valor
 
-    if len(contagem_rep) == 2 and 4 in ocorrencias:
-        valor = 0
-        for dado in lista_inteiros:
-            valor += dado
-        return valor
-    else:
-        return 0
+    return 0
