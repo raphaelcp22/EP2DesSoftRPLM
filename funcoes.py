@@ -45,8 +45,8 @@ def calcula_pontos_sequencia_baixa (lista_inteiros):
     while i < len(lista_crescente):
         if lista_crescente[i] - lista_crescente[i-1] == 1:
             contador += 1
-            if contador >= 4:
-                pontuacao += 15
+            if contador == 4:
+                pontuacao = 15
         else: 
             contador = 1
         i += 1
