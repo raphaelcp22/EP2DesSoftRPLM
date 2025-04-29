@@ -86,3 +86,22 @@ def calcula_pontos_full_house (lista_inteiros):
         return valor
     else:
         return 0
+    
+def calcula_pontos_quadra(lista_inteiros):
+    contagem_rep = {}
+
+    for dado in lista_inteiros:
+        if dado in contagem_rep:
+            contagem_rep[dado] += 1
+        else:
+            contagem_rep[dado] = 1
+
+    ocorrencias = contagem_rep.values()
+
+    if len(contagem_rep) == 2 and 4 in ocorrencias:
+        valor = 0
+        for dado in lista_inteiros:
+            valor += dado
+        return valor
+    else:
+        return 0
