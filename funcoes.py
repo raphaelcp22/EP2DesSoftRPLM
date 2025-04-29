@@ -52,4 +52,17 @@ def calcula_pontos_sequencia_baixa (lista_inteiros):
         i += 1
     return pontuacao
 
-
+def calcula_pontos_sequencia_alta (lista_int):
+    contador = 1
+    pontuacao = 0
+    lista_crescente = sorted(set(lista_inteiros))
+    i = 1
+    while i < len(lista_crescente):
+        if lista_crescente[i] - lista_crescente[i-1] == 1:
+            contador += 1
+            if contador == 5:
+                pontuacao = 30
+        else: 
+            contador = 1
+        i += 1
+    return pontuacao
