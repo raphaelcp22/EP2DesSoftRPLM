@@ -120,3 +120,13 @@ def calcula_pontos_quina(lista_inteiros):
             return valor
 
     return 0
+
+def calcula_pontos_regra_avancada (lista_inteiros):
+    return {
+    "cinco_iguais": calcula_pontos_quina (lista_inteiros) ,
+    "full_house": calcula_pontos_full_house (lista_inteiros) ,
+    "quadra": calcula_pontos_quadra(lista_inteiros) ,
+    "sem_combinação" : calcula_pontos_soma(lista_inteiros) ,
+    "sequencia_alta" : calcula_pontos_sequencia_alta(lista_inteiros) ,
+    "sequencia_baixa" : calcula_pontos_sequencia_baixa(lista_inteiros)
+    }
