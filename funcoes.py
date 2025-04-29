@@ -97,7 +97,7 @@ def calcula_pontos_quadra(lista_inteiros):
             contagem_rep[dado] = 1
 
     for quantidade in contagem_rep.values():
-        if quantidade > 4:
+        if quantidade >= 4:
             valor = 0
             for dado in lista_inteiros:
                 valor += dado
