@@ -38,14 +38,14 @@ def calcula_pontos_soma (lista):
     return soma 
 
 def calcula_pontos_sequencia_baixa (lista_inteiros):
-    contador = 0
+    contador = 1
     pontuacao = 0
     lista_crescente = sorted(set(lista_inteiros))
     i = 1
     while i < len(lista_crescente):
-        if lista_crescente[i] > lista_crescente[i-1]:
+        if lista_crescente[i] - lista_crescente[i-1] == 1:
             contador += 1
-            if contador >= 3:
+            if contador >= 4:
                 pontuacao += 15
         else: 
             contador = 1
