@@ -24,3 +24,9 @@ def remover_dado(dados_rolados, dados_no_estoque, indice):
     del dados_no_estoque[indice]
 
     return [dados_rolados, dados_no_estoque]
+
+def calcula_pontos_regra_simples(lista_int):
+    dicio = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
+    for dado in lista_int:
+        dicio[dado] += dado
+    return dicio
