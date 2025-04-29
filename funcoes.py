@@ -34,5 +34,5 @@ def calcula_pontos_regra_simples(lista_int):
 def calcula_pontos_soma (lista):
     soma = 0
     for faces in lista:
-        soma += lista[faces]
+        soma += faces
     return soma 
