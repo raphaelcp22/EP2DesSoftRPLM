@@ -80,6 +80,9 @@ def calcula_pontos_full_house (lista_inteiros):
     ocorrencias = contagem_rep.values()
 
     if len(contagem_rep) == 2 and 3 in ocorrencias and 2 in ocorrencias:
-        return sum(lista_inteiros)
+        valor = 0
+        for dado in lista_inteiros:
+            valor += dado
+        return valor
     else:
         return 0
