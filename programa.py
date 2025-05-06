@@ -1,9 +1,9 @@
 from funcoes import *
 
-numero_rodadas = 0
+contador_rodadas = 0
 
-tabela_pontos = {
-    'pontuacao_simples': {
+tabela_pontuacoes = {
+    'regra_simples': {
         1: -1,
         2: -1,
         3: -1,
@@ -11,7 +11,7 @@ tabela_pontos = {
         5: -1,
         6: -1
     },
-    'pontuacao_avancada': {
+    'regra_avancada': {
         'sem_combinacao': -1,
         'quadra': -1,
         'full_house': -1,
@@ -21,95 +21,99 @@ tabela_pontos = {
     }
 }
 
-dados_atuais = rolar_dados(5)
-dados_guardados = []
+dados_jogados = rolar_dados(5)
+dados_selecionados = []
 
-def jogar_rodada(tabela_pontos, dados_atuais, dados_guardados):
-    rerrolagens_feitas = 0
+def executar_rodada(tabela_pontuacoes, dados_jogados, dados_selecionados):
+    rerrolagens_realizadas = 0
     print('Digite 1 para guardar um dado, 2 para remover um dado, 3 para rerrolar, 4 para ver a cartela ou 0 para marcar a pontuação:')
-    acao = input('>')
-    while acao != '0':
-        if acao == '1':
+    escolha = input('>')
+    while escolha != '0':
+        if escolha == '1':
             print('Digite o índice do dado a ser guardado (0 a 4):')
-            indice = int(input('>'))
-            lista_dados = guardar_dado(dados_atuais, dados_guardados, indice)
-            dados_atuais = lista_dados[0]
-            dados_guardados = lista_dados[1]
-            print(f'Dados rolados: {dados_atuais}')
-            print(f'Dados guardados: {dados_guardados}')
-        elif acao == '2':
+            indice_dado = int(input('>'))
+            resultado = guardar_dado(dados_jogados, dados_selecionados, indice_dado)
+            dados_jogados = resultado[0]
+            dados_selecionados = resultado[1]
+            print(f'Dados rolados: {dados_jogados}')
+            print(f'Dados guardados: {dados_selecionados}')
+            print("Digite 1 para guardar um dado, 2 para remover um dado, 3 para rerrolar, 4 para ver a cartela ou 0 para marcar a pontuação:")
+            escolha = input('>')
+        elif escolha == '2':
             print('Digite o índice do dado a ser removido (0 a 4):')
-            indice = int(input('>'))
-            lista_dados = remover_dado(dados_atuais, dados_guardados, indice)
-            dados_atuais = lista_dados[0]
-            dados_guardados = lista_dados[1]
-            print(f'Dados rolados: {dados_atuais}')
-            print(f'Dados guardados: {dados_guardados}')
-        elif acao == '3':
-            if rerrolagens_feitas == 2:
+            indice_dado = int(input('>'))
+            resultado = remover_dado(dados_jogados, dados_selecionados, indice_dado)
+            dados_jogados = resultado[0]
+            dados_selecionados = resultado[1]
+            print(f'Dados rolados: {dados_jogados}')
+            print(f'Dados guardados: {dados_selecionados}')
+            print("Digite 1 para guardar um dado, 2 para remover um dado, 3 para rerrolar, 4 para ver a cartela ou 0 para marcar a pontuação:")
+            escolha = input('>')
+        elif escolha == '3':
+            if rerrolagens_realizadas == 2:
                 print('Você já usou todas as rerrolagens.')
             else:
-                dados_atuais = rolar_dados(len(dados_atuais))
-                rerrolagens_feitas += 1
-            print(f'Dados rolados: {dados_atuais}')
-            print(f'Dados guardados: {dados_guardados}')
-        elif acao == '4':
-            imprime_cartela(tabela_pontos)
-            print(f'Dados rolados: {dados_atuais}')
-            print(f'Dados guardados: {dados_guardados}')
+                dados_jogados = rolar_dados(len(dados_jogados))
+                rerrolagens_realizadas += 1
+            print(f'Dados rolados: {dados_jogados}')
+            print(f'Dados guardados: {dados_selecionados}')
+            print("Digite 1 para guardar um dado, 2 para remover um dado, 3 para rerrolar, 4 para ver a cartela ou 0 para marcar a pontuação:")
+            escolha = input('>')
+        elif escolha == '4':
+            imprime_cartela(tabela_pontuacoes)
+            print(f'Dados rolados: {dados_jogados}')
+            print(f'Dados guardados: {dados_selecionados}')
+            print("Digite 1 para guardar um dado, 2 para remover um dado, 3 para rerrolar, 4 para ver a cartela ou 0 para marcar a pontuação:")
+            escolha = input('>')
         else:
             print("Opção inválida. Tente novamente.")
-        print('Digite 1 para guardar um dado, 2 para remover um dado, 3 para rerrolar, 4 para ver a cartela ou 0 para marcar a pontuação:')
-        acao = input('>')
+            escolha = input('>')  
 
-    dados_finais = dados_atuais + dados_guardados
+    dados_finalizados = dados_jogados + dados_selecionados
     print('Digite a combinação desejada:')
     escolha_combinacao = input('>')
-    opcoes_numericas = ['1', '2', '3', '4', '5', '6']
+    opcoes_simples = ['1', '2', '3', '4', '5', '6']
     while True:
-        if escolha_combinacao in opcoes_numericas:
+        if escolha_combinacao in opcoes_simples:
             categoria = int(escolha_combinacao)
         else:
             categoria = escolha_combinacao
 
-        if (categoria in tabela_pontos['pontuacao_simples'] and tabela_pontos['pontuacao_simples'][categoria] != -1) or \
-           (categoria in tabela_pontos['pontuacao_avancada'] and tabela_pontos['pontuacao_avancada'][categoria] != -1):
+        if (categoria in tabela_pontuacoes['regra_simples'] and tabela_pontuacoes['regra_simples'][categoria] != -1) or \
+           (categoria in tabela_pontuacoes['regra_avancada'] and tabela_pontuacoes['regra_avancada'][categoria] != -1):
             print("Essa combinação já foi utilizada.")
             escolha_combinacao = input('> ')
-        elif categoria not in tabela_pontos['pontuacao_simples'] and categoria not in tabela_pontos['pontuacao_avancada']:
+        elif categoria not in tabela_pontuacoes['regra_simples'] and categoria not in tabela_pontuacoes['regra_avancada']:
             print("Combinação inválida. Tente novamente.")
             escolha_combinacao = input('> ')
         else:
             break
 
-    faz_jogada(dados_finais, categoria, tabela_pontos)
-    return tabela_pontos
+    faz_jogada(dados_finalizados, escolha_combinacao, tabela_pontuacoes)
+    return tabela_pontuacoes
 
-contador_rodadas = 0
-imprime_cartela(tabela_pontos)
-print(f'Dados rolados: {dados_atuais}')
-print(f'Dados guardados: {dados_guardados}')
-
+imprime_cartela(tabela_pontuacoes)
+print(f'Dados rolados: {dados_jogados}')
+print(f'Dados guardados: {dados_selecionados}')
 while contador_rodadas < 12:
-    tabela_pontos = jogar_rodada(tabela_pontos, dados_atuais, dados_guardados)
-    dados_atuais = rolar_dados(5)
-    dados_guardados = []
+    tabela_pontuacoes = executar_rodada(tabela_pontuacoes, dados_jogados, dados_selecionados)
+    dados_jogados = rolar_dados(5)
+    dados_selecionados = []
     if contador_rodadas != 11:
-        print(f'Dados rolados: {dados_atuais}')
-        print(f'Dados guardados: {dados_guardados}')
+        print(f'Dados rolados: {dados_jogados}')
+        print(f'Dados guardados: {dados_selecionados}')
     contador_rodadas += 1
 
-subtotal_simples = 0
+soma_simples = 0
 pontuacao_total = 0
+for tipo_regra, valores_pontuacao in tabela_pontuacoes.items():
+    for pontos in valores_pontuacao.values():
+        pontuacao_total += pontos
+        if tipo_regra == 'regra_simples':
+            soma_simples += pontos
 
-for tipo_regra, valores in tabela_pontos.items():
-    for pontuacao in valores.values():
-        pontuacao_total += pontuacao
-        if tipo_regra == 'pontuacao_simples':
-            subtotal_simples += pontuacao
-
-if subtotal_simples >= 63:
+if soma_simples >= 63:
     pontuacao_total += 35
 
-imprime_cartela(tabela_pontos)
+imprime_cartela(tabela_pontuacoes)
 print(f'Pontuação total: {pontuacao_total}')
